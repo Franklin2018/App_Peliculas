@@ -1,7 +1,9 @@
-import 'package:app_peliculas/src/providers/peliculas_provider.dart';
-import 'package:app_peliculas/src/widgets/card_swiper_widget.dart';
 import 'package:flutter/material.dart';
  
+import 'package:app_peliculas/src/widgets/card_swiper_widget.dart';
+import 'package:app_peliculas/src/providers/peliculas_provider.dart';
+import 'package:app_peliculas/src/widgets/movie_horizontal.dart';
+
 class HomePage extends StatelessWidget {
   
    final peliculasProvider = new PeliculasProvider();
@@ -22,8 +24,10 @@ class HomePage extends StatelessWidget {
       ),
       body: Container(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-            _swiperTarjetas()
+            _swiperTarjetas(),
+            _footer(context),
           ],
         )
       )
@@ -51,5 +55,32 @@ class HomePage extends StatelessWidget {
 
   //  peliculasProvider.getEnCines();
   //  return  CardSwiper(peliculas: [1,2,3,4,5,6]);
+ }
+ Widget _footer(BuildContext context){
+
+   return Container(
+     width: double.infinity,
+     child: Column(
+       crossAxisAlignment: CrossAxisAlignment.start,
+       children: <Widget>[
+         Container(
+           padding: EdgeInsets.only(left: 10.0),
+           child: Text('Mas Populares', style: Theme.of(context).textTheme.subhead)),
+          SizedBox(height: 5.0),
+          FutureBuilder(
+            future: peliculasProvider.getPopulares(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if(snapshot.hasData){
+                return MovieHorizontal(peliculas: snapshot.data);
+              }else{
+                return Center(
+                    child:CircularProgressIndicator() //icon de cargando ,
+                );      
+              }              
+            },
+          ),
+       ],
+     ),
+   );
  }
 }
