@@ -67,5 +67,13 @@ class Pelicula {
     releaseDate      =   json['release_date'];
   }
 
+  getPosterImg(){
+    if(posterPath == null){
+      return 'https://lh3.googleusercontent.com/proxy/0LAmws8DFZYAZNsyUM5iZ-_hSScTjV0HylnxutniOwebmgfJSl_POSMtkkaYDCahd0FInNpEYX_3vfKGG3j8DSORA8GQwTBUZz62vlW1asF2-A';
+    }else{
+    return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
+  }
+
 }
 
