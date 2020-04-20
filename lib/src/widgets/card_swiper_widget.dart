@@ -12,7 +12,7 @@ class CardSwiper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final _screenSize = MediaQuery.of(context).size; //para obtejer variables de la pantalla
+    final _screenSize = MediaQuery.of(context).size; //para obtener variables de la pantalla
 
     return Container(
      padding: EdgeInsets.only(top: 10.0),
